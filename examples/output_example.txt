@@ -1,0 +1,14 @@
+SQL:
+SELECT
+  DATE_TRUNC('week', order_date) AS week,
+  SUM(amount) / COUNT(DISTINCT order_id) AS aov
+FROM orders
+WHERE order_date >= CURRENT_DATE - INTERVAL '3 months'
+GROUP BY 1
+ORDER BY 1;
+
+Explanation:
+- Assumes an orders table with order_date, amount, order_id
+- Filters to the last quarter
+- Aggregates weekly
+- Outputs a SQL template only (not executed)

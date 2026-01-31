@@ -6,6 +6,9 @@ def load_prompt() -> str:
     """Load the base prompt template."""
     return Path("prompts/sql_prompt.txt").read_text()
 
+def is_ambiguous(question: str) -> bool:
+    ambiguous_terms = ["recent", "best", "top", "improve", "performance"]
+    return any(term in question.lower() for term in ambiguous_terms)
 
 def generate_sql(question: str) -> str:
     """
@@ -39,6 +42,14 @@ def main():
     args = parser.parse_args()
 
     prompt = load_prompt()
+    if is_ambiguous(args.question):
+        print(
+            "The question may be ambiguous.\n"
+            "Please clarify time range, metrics, and filters "
+            "before generating SQL."
+        )
+        return
+
     output = generate_sql(args.question)
 
     print(prompt)

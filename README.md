@@ -24,3 +24,12 @@ Instructions will be added as the assistant evolves.
 ## Trade-offs & Assumptions
 - Prioritizes clarity and safety over autonomy
 - Outputs templates, not executed queries
+
+## Examples
+See `examples/` for sample business questions and generated SQL templates.
+
+## Safety & Guardrails
+- Detects ambiguous questions and requests clarification
+- Generates SQL templates only (no execution)
+- Separates prompt logic from code
+
